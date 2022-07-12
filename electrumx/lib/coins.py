@@ -3998,6 +3998,42 @@ class Beyondcoin(Coin):
     RPC_PORT = 10332
     REORG_LIMIT = 5000
 
+class Raptoreum(Coin):
+    NAME = "Raptoreum"
+    SHORTNAME = "RTM"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    GENESIS_HASH = ('b79e5df07278b9567ada8fc655ffbfa9'
+    		     'd3f586dc38da3dd93053686f41caeea0')
+    P2PKH_VERBYTE = bytes.fromhex("3c")
+    P2SH_VERBYTES = (bytes.fromhex("10"),)
+    WIF_BYTE = bytes.fromhex("80")
+    TX_COUNT_HEIGHT = 29048
+    TX_COUNT = 79817
+    TX_PER_BLOCK = 4
+    RPC_PORT = 10225
+    PEERS = [
+
+    ]
+    SESSIONCLS = DashElectrumX
+    DAEMON = daemon.DashDaemon
+    DESERIALIZER = lib_tx_dash.DeserializerDash
+
+class Bitcoin2(Coin):
+    NAME = "Bitcoin2"
+    SHORTNAME = "BTC2"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    GENESIS_HASH = ('3ee1620fa1706966da5e5182a6642206'
+                    '91491bdfd9289a73cadf6244fa5dccb5')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 8908766
+    TX_COUNT_HEIGHT = 1105256
+    TX_PER_BLOCK = 10
+    RPC_PORT = 10226
+    REORG_LIMIT = 800
 
 class Syscoin(AuxPowMixin, Coin):
     NAME = "Syscoin"
