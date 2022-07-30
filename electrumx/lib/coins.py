@@ -4026,14 +4026,34 @@ class Bitcoin2(Coin):
     NET = "mainnet"
     XPUB_VERBYTES = bytes.fromhex("0488b21e")
     XPRV_VERBYTES = bytes.fromhex("0488ade4")
-    GENESIS_HASH = ('3ee1620fa1706966da5e5182a6642206'
-                    '91491bdfd9289a73cadf6244fa5dccb5')
-    DESERIALIZER = lib_tx.DeserializerSegWit
     TX_COUNT = 8908766
     TX_COUNT_HEIGHT = 1105256
     TX_PER_BLOCK = 10
     RPC_PORT = 10226
     REORG_LIMIT = 800
+    CHUNK_SIZE = 200
+    GENESIS_HASH = '3ee1620fa1706966da5e5182a664220691491bdfd9289a73cadf6244fa5dccb5'
+    P2PKH_VERBYTE = bytes.fromhex("1e")
+    P2SH_VERBYTE = bytes.fromhex("0d")
+    WIF_BYTE = bytes.fromhex("d4")
+    REORG_LIMIT = 50
+    BASIC_HEADER_SIZE = 80
+    ZEROCOIN_START_HEIGHT = 1391
+    HDR_V4_HEIGHT = 1391
+    ZEROCOIN_END_HEIGHT = 2153200
+    ZEROCOIN_BLOCK_VERSION = 4
+    HDR_V4_SIZE = 112
+    HDR_V4_START_OFFSET = HDR_V4_HEIGHT * BASIC_HEADER_SIZE
+
+
+    @classmethod
+    def static_header_offset(cls, height):
+        assert cls.STATIC_BLOCK_HEADERS
+        if height >= cls.ZEROCOIN_START_HEIGHT:
+            relative_v4_offset = (height - cls.ZEROCOIN_START_HEIGHT) * cls.HDR_V4_SIZE
+            return cls.HDR_V4_START_OFFSET + relative_v4_offset
+        else:
+            return height * cls.BASIC_HEADER_SIZE
 
 class Syscoin(AuxPowMixin, Coin):
     NAME = "Syscoin"
