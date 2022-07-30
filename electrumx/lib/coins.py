@@ -4044,6 +4044,11 @@ class Bitcoin2(Coin):
     HDR_V4_SIZE = 112
     HDR_V4_START_OFFSET = HDR_V4_HEIGHT * BASIC_HEADER_SIZE
 
+    @classmethod
+    def max_fetch_blocks(cls, height):
+        if height < 2000:
+            return 100
+        return 1000
 
     @classmethod
     def static_header_offset(cls, height):
