@@ -150,7 +150,7 @@ class Coin:
     @classmethod
     def max_fetch_blocks(cls, height):
         if height < 130000:
-            return 1000
+            return 100
         return 100
 
     @classmethod
@@ -4030,7 +4030,6 @@ class Bitcoin2(Coin):
     TX_COUNT_HEIGHT = 1105256
     TX_PER_BLOCK = 10
     RPC_PORT = 10226
-    REORG_LIMIT = 800
     CHUNK_SIZE = 200
     GENESIS_HASH = '3ee1620fa1706966da5e5182a664220691491bdfd9289a73cadf6244fa5dccb5'
     P2PKH_VERBYTE = bytes.fromhex("1e")
@@ -4063,7 +4062,7 @@ class Bitcoin2(Coin):
         else:
             import quark_hash
             return quark_hash.getPoWHash(header)
-            
+
 class Syscoin(AuxPowMixin, Coin):
     NAME = "Syscoin"
     SHORTNAME = "SYS"
